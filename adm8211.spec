@@ -3,23 +3,22 @@
 %bcond_without	dist_kernel	# without distribution kernel
 %bcond_without	smp		# don't build SMP module
 %bcond_with	verbose		# verbose build (V=1)
-
+#
 %define		_orig_name	adm8211
-
+#
 Summary:	Kernel driver for ADM8211 based wireless ethernet cards
 Summary(pl):	Sterownik j±dra dla bezprzewodowych kart sieciowych na ADM8211
 Name:		kernel-net-%{_orig_name}
 Version:	20040601
-%define	_rel	1
-Release:	%{_rel}@%{_kernel_ver_str}
+Release:	1@%{_kernel_ver_str}
 License:	GPL
 Group:		Base/Kernel
 Source0:	http://aluminum.sourmilk.net/%{_orig_name}/%{_orig_name}-%{version}.tar.bz2
 #Source0-MD5:	75cd1aea7b79542c8782c873bdba0485
 URL:		http://aluminum.sourmilk.net/%{_orig_name}/
-%{?with_dist_kernel:BuildRequires:	kernel-headers}
+%{?with_dist_kernel:BuildRequires:	kernel-module-build >= 2.6.7}
 BuildRequires:	%{kgcc_package}
-BuildRequires:	rpmbuild(macros) >= 1.118
+BuildRequires:	rpmbuild(macros) >= 1.153
 %{?with_dist_kernel:%requires_releq_kernel_up}
 Requires(post,postun):	/sbin/depmod
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -30,18 +29,17 @@ Linux kernel driver for ADM8211 based wireless ethernet cards.
 %description -l pl
 Sterownik j±dra Linuksa dla bezprzewodowych kart sieciowych na ADM8211.
 
-%package -n kernel-smp-net-%{_orig_name}
+%package -n kernel-smp-net-adm8211
 Summary:	SMP kernel driver for ADM8211 based wireless ethernet cards
 Summary(pl):	Sterownik j±dra SMP dla bezprzewodowych kart sieciowych na ADM8211
-Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 %{?with_dist_kernel:%requires_releq_kernel_smp}
 Requires(post,postun):	/sbin/depmod
 
-%description -n kernel-smp-net-%{_orig_name}
+%description -n kernel-smp-net-adm8211
 Linux SMP kernel driver for ADM8211 based wireless ethernet cards.
 
-%description -n kernel-smp-net-%{_orig_name} -l pl
+%description -n kernel-smp-net-adm8211 -l pl
 Sterownik j±dra Linuksa SMP dla bezprzewodowych kart sieciowych na
 ADM8211.
 
@@ -59,7 +57,7 @@ for cfg in %{?with_dist_kernel:%{?with_smp:smp} up}%{!?with_dist_kernel:nondist}
     ln -sf %{_kernelsrcdir}/include/linux/autoconf-up.h include/linux/autoconf.h
     ln -sf %{_kernelsrcdir}/include/asm-%{_target_base_arch} include/asm
     touch include/config/MARKER
-    %{__make} -C %{_kernelsrcdir} modules \
+    %{__make} -C %{_kernelsrcdir} clean modules \
         RCS_FIND_IGNORE="-name '*.ko' -o" \
         M=$PWD O=$PWD \
         %{?with_verbose:V=1}
@@ -85,16 +83,18 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 %depmod %{_kernel_ver}
 
-%post	-n kernel-smp-net-%{_orig_name}
+%post	-n kernel-smp-net-adm8211
 %depmod %{_kernel_ver}smp
 
-%postun -n kernel-smp-net-%{_orig_name}
+%postun -n kernel-smp-net-adm8211
 %depmod %{_kernel_ver}smp
 
 %files
 %defattr(644,root,root,755)
-/lib/modules/%{_kernel_ver}/kernel/drivers/net/wireless/*
+/lib/modules/%{_kernel_ver}/kernel/drivers/net/wireless/*.ko*
 
-%files -n kernel-smp-net-%{_orig_name}
+%if %{with smp} && %{with dist_kernel}
+%files -n kernel-smp-net-adm8211
 %defattr(644,root,root,755)
-/lib/modules/%{_kernel_ver}smp/kernel/drivers/net/wireless/*
+/lib/modules/%{_kernel_ver}smp/kernel/drivers/net/wireless/*.ko*
+%endif
