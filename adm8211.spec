@@ -1,36 +1,34 @@
 #
-# TODO:
-# - rename to adm8211.spec ?
+# TODO: rename to adm8211.spec
  
 # Conditional build:
 %bcond_without	dist_kernel	# without distribution kernel
 %bcond_without	smp		# don't build SMP module
 %bcond_with	verbose		# verbose build (V=1)
 #
-%define		_orig_name	adm8211
-#
 Summary:	Kernel driver for ADM8211 based wireless ethernet cards
 Summary(pl):	Sterownik j±dra dla bezprzewodowych kart sieciowych na ADM8211
-Name:		%{_orig_name}
+Name:		adm8211
 Version:	20040601
 %define         _rel    1.5
 Release:        %{_rel}
 License:	GPL
 Group:		Base/Kernel
-Source0:	http://aluminum.sourmilk.net/%{_orig_name}/%{_orig_name}-%{version}.tar.bz2
+Source0:	http://aluminum.sourmilk.net/adm8211/%{name}-%{version}.tar.bz2
 #Source0-MD5:	75cd1aea7b79542c8782c873bdba0485
-URL:		http://aluminum.sourmilk.net/%{_orig_name}/
+URL:		http://aluminum.sourmilk.net/adm8211/
 %{?with_dist_kernel:BuildRequires:	kernel-module-build >= 2.6.7}
 BuildRequires:	%{kgcc_package}
 BuildRequires:	rpmbuild(macros) >= 1.153
 %{?with_dist_kernel:%requires_releq_kernel_up}
 Requires(post,postun):	/sbin/depmod
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
 %description
-Dummy package ? TODO
+Kernel driver for ADM8211 based wireless ethernet cards.
 
 %description -l pl
-Dummy package ? TODO
+Sterownik j±dra dla bezprzewodowych kart sieciowych na ADM8211.
 
 %package -n kernel-net-adm8211
 Summary:        Linux driver for WLAN cards based on RT2400
@@ -61,7 +59,7 @@ Sterownik j±dra Linuksa SMP dla bezprzewodowych kart sieciowych na
 ADM8211.
 
 %prep
-%setup -q -n %{_orig_name}
+%setup -q -n %{name}
 
 %build
 for cfg in %{?with_dist_kernel:%{?with_smp:smp} up}%{!?with_dist_kernel:nondist}; do
@@ -78,17 +76,17 @@ for cfg in %{?with_dist_kernel:%{?with_smp:smp} up}%{!?with_dist_kernel:nondist}
         RCS_FIND_IGNORE="-name '*.ko' -o" \
         M=$PWD O=$PWD \
         %{?with_verbose:V=1}
-    mv %{_orig_name}{,-$cfg}.ko
+    mv %{name}{,-$cfg}.ko
 done
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}{,smp}/kernel/drivers/net/wireless
-install %{_orig_name}-%{?with_dist_kernel:up}%{!?with_dist_kernel:nondist}.ko \
-        $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/kernel/drivers/net/wireless/%{_orig_name}.ko
+install %{name}-%{?with_dist_kernel:up}%{!?with_dist_kernel:nondist}.ko \
+        $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/kernel/drivers/net/wireless/%{name}.ko
 %if %{with smp} && %{with dist_kernel}
-install %{_orig_name}-smp.ko \
-        $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}smp/kernel/drivers/net/wireless/%{_orig_name}.ko
+install %{name}-smp.ko \
+        $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}smp/kernel/drivers/net/wireless/%{name}.ko
 %endif
 
 %clean
