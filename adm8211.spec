@@ -17,38 +17,38 @@ Group:		Base/Kernel
 Source0:	http://aluminum.sourmilk.net/%{_orig_name}/%{_orig_name}-%{version}.tar.bz2
 #Source0-MD5:	75cd1aea7b79542c8782c873bdba0485
 URL:		http://aluminum.sourmilk.net/%{_orig_name}/
-%{!?_without_dist_kernel:BuildRequires:	kernel-headers }
+%{?with_dist_kernel:BuildRequires:	kernel-headers}
 BuildRequires:	%{kgcc_package}
 BuildRequires:	rpmbuild(macros) >= 1.118
-%{!?_without_dist_kernel:%requires_releq_kernel_up}
+%{?with_dist_kernel:%requires_releq_kernel_up}
 Requires(post,postun):	/sbin/depmod
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Kernel driver for ADM8211 based wireless ethernet cards
+Linux kernel driver for ADM8211 based wireless ethernet cards.
 
 %description -l pl
-Sterownik j±dra dla bezprzewodowych kart sieciowych na ADM8211
+Sterownik j±dra Linuksa dla bezprzewodowych kart sieciowych na ADM8211.
 
 %package -n kernel-smp-net-%{_orig_name}
-Summary:	Kernel driver for ADM8211 based wireless ethernet cards
-Summary(pl):	Sterownik j±dra dla bezprzewodowych kart sieciowych na ADM8211
+Summary:	SMP kernel driver for ADM8211 based wireless ethernet cards
+Summary(pl):	Sterownik j±dra SMP dla bezprzewodowych kart sieciowych na ADM8211
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
-%{!?_without_dist_kernel:%requires_releq_kernel_smp}
+%{?with_dist_kernel:%requires_releq_kernel_smp}
 Requires(post,postun):	/sbin/depmod
 
 %description -n kernel-smp-net-%{_orig_name}
-Kernel driver for ADM8211 based wireless ethernet cards
+Linux SMP kernel driver for ADM8211 based wireless ethernet cards.
 
 %description -n kernel-smp-net-%{_orig_name} -l pl
-Sterownik j±dra dla bezprzewodowych kart sieciowych na ADM8211
+Sterownik j±dra Linuksa SMP dla bezprzewodowych kart sieciowych na
+ADM8211.
 
 %prep
 %setup -q -n %{_orig_name}
 
 %build
-
 for cfg in %{?with_dist_kernel:%{?with_smp:smp} up}%{!?with_dist_kernel:nondist}; do
     if [ ! -r "%{_kernelsrcdir}/config-$cfg" ]; then
         exit 1
