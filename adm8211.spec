@@ -1,4 +1,7 @@
 #
+# TODO:
+# - rename to adm8211.spec ?
+ 
 # Conditional build:
 %bcond_without	dist_kernel	# without distribution kernel
 %bcond_without	smp		# don't build SMP module
@@ -8,9 +11,10 @@
 #
 Summary:	Kernel driver for ADM8211 based wireless ethernet cards
 Summary(pl):	Sterownik j±dra dla bezprzewodowych kart sieciowych na ADM8211
-Name:		kernel-net-%{_orig_name}
+Name:		%{_orig_name}
 Version:	20040601
-Release:	1@%{_kernel_ver_str}
+%define         _rel    1.5
+Release:        %{_rel}
 License:	GPL
 Group:		Base/Kernel
 Source0:	http://aluminum.sourmilk.net/%{_orig_name}/%{_orig_name}-%{version}.tar.bz2
@@ -22,17 +26,30 @@ BuildRequires:	rpmbuild(macros) >= 1.153
 %{?with_dist_kernel:%requires_releq_kernel_up}
 Requires(post,postun):	/sbin/depmod
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
 %description
-Linux kernel driver for ADM8211 based wireless ethernet cards.
+Dummy package ? TODO
 
 %description -l pl
+Dummy package ? TODO
+
+%package -n kernel-net-adm8211
+Summary:        Linux driver for WLAN cards based on RT2400
+Summary(pl):    Sterownik dla Linuksa do kart bezprzewodowych opartych na uk3adzie RT2400
+Release:        %{_rel}@%{_kernel_ver_str}
+Group:          Base/Kernel
+
+%description -n kernel-net-adm8211
+Linux kernel driver for ADM8211 based wireless ethernet cards.
+
+%description -n kernel-net-adm8211 -l pl
 Sterownik j±dra Linuksa dla bezprzewodowych kart sieciowych na ADM8211.
 
 %package -n kernel-smp-net-adm8211
 Summary:	SMP kernel driver for ADM8211 based wireless ethernet cards
 Summary(pl):	Sterownik j±dra SMP dla bezprzewodowych kart sieciowych na ADM8211
 Group:		Base/Kernel
+Release:        %{_rel}@%{_kernel_ver_str}
+
 %{?with_dist_kernel:%requires_releq_kernel_smp}
 Requires(post,postun):	/sbin/depmod
 
@@ -77,10 +94,10 @@ install %{_orig_name}-smp.ko \
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
+%post -n kernel-net-adm8211
 %depmod %{_kernel_ver}
 
-%postun
+%postun -n kernel-net-adm8211
 %depmod %{_kernel_ver}
 
 %post	-n kernel-smp-net-adm8211
@@ -89,7 +106,7 @@ rm -rf $RPM_BUILD_ROOT
 %postun -n kernel-smp-net-adm8211
 %depmod %{_kernel_ver}smp
 
-%files
+%files -n kernel-net-adm8211
 %defattr(644,root,root,755)
 /lib/modules/%{_kernel_ver}/kernel/drivers/net/wireless/*.ko*
 
