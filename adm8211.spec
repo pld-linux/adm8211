@@ -9,13 +9,13 @@
 Summary:	Kernel driver for ADM8211 based wireless ethernet cards
 Summary(pl):	Sterownik j±dra dla bezprzewodowych kart sieciowych na ADM8211
 Name:		adm8211
-Version:	20040601
+Version:	20040820
 %define		_rel	2
 Release:	%{_rel}
 License:	GPL
 Group:		Base/Kernel
 Source0:	http://aluminum.sourmilk.net/adm8211/%{name}-%{version}.tar.bz2
-#Source0-MD5:	75cd1aea7b79542c8782c873bdba0485
+# Source0-md5:	cdf182ea524bfb43cf2abce0de95ea56
 URL:		http://aluminum.sourmilk.net/adm8211/
 %{?with_dist_kernel:BuildRequires:	kernel-module-build >= 2.6.7}
 BuildRequires:	%{kgcc_package}
