@@ -53,8 +53,8 @@ for cfg in %{?with_dist_kernel:%{?with_smp:smp} up}%{!?with_dist_kernel:nondist}
     fi
     rm -rf include
     install -d include/{config,linux}
-    ln -sf %{_kernelsrcdir}/config-up .config
-    ln -sf %{_kernelsrcdir}/include/linux/autoconf-up.h include/linux/autoconf.h
+    ln -sf %{_kernelsrcdir}/config-$cfg .config
+    ln -sf %{_kernelsrcdir}/include/linux/autoconf-$cfg.h include/linux/autoconf.h
     ln -sf %{_kernelsrcdir}/include/asm-%{_target_base_arch} include/asm
     touch include/config/MARKER
     %{__make} -C %{_kernelsrcdir} clean modules \
