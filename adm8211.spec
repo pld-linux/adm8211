@@ -10,8 +10,8 @@ Summary:	Kernel driver for ADM8211 based wireless ethernet cards
 Summary(pl):	Sterownik j±dra dla bezprzewodowych kart sieciowych na ADM8211
 Name:		adm8211
 Version:	20040601
-%define         _rel    2
-Release:        %{_rel}
+%define		_rel	2
+Release:	%{_rel}
 License:	GPL
 Group:		Base/Kernel
 Source0:	http://aluminum.sourmilk.net/adm8211/%{name}-%{version}.tar.bz2
@@ -31,10 +31,10 @@ Kernel driver for ADM8211 based wireless ethernet cards.
 Sterownik j±dra dla bezprzewodowych kart sieciowych na ADM8211.
 
 %package -n kernel-net-adm8211
-Summary:        Linux driver for WLAN cards based on RT2400
-Summary(pl):    Sterownik dla Linuksa do kart bezprzewodowych opartych na uk3adzie RT2400
-Release:        %{_rel}@%{_kernel_ver_str}
-Group:          Base/Kernel
+Summary:	Linux driver for WLAN cards based on RT2400
+Summary(pl):	Sterownik dla Linuksa do kart bezprzewodowych opartych na uk3adzie RT2400
+Release:	%{_rel}@%{_kernel_ver_str}
+Group:		Base/Kernel
 
 %description -n kernel-net-adm8211
 Linux kernel driver for ADM8211 based wireless ethernet cards.
@@ -46,7 +46,7 @@ Sterownik j±dra Linuksa dla bezprzewodowych kart sieciowych na ADM8211.
 Summary:	SMP kernel driver for ADM8211 based wireless ethernet cards
 Summary(pl):	Sterownik j±dra SMP dla bezprzewodowych kart sieciowych na ADM8211
 Group:		Base/Kernel
-Release:        %{_rel}@%{_kernel_ver_str}
+Release:	%{_rel}@%{_kernel_ver_str}
 
 %{?with_dist_kernel:%requires_releq_kernel_smp}
 Requires(post,postun):	/sbin/depmod
@@ -83,10 +83,10 @@ done
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}{,smp}/kernel/drivers/net/wireless
 install %{name}-%{?with_dist_kernel:up}%{!?with_dist_kernel:nondist}.ko \
-        $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/kernel/drivers/net/wireless/%{name}.ko
+	$RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}/kernel/drivers/net/wireless/%{name}.ko
 %if %{with smp} && %{with dist_kernel}
 install %{name}-smp.ko \
-        $RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}smp/kernel/drivers/net/wireless/%{name}.ko
+	$RPM_BUILD_ROOT/lib/modules/%{_kernel_ver}smp/kernel/drivers/net/wireless/%{name}.ko
 %endif
 
 %clean
