@@ -1,24 +1,24 @@
 #
 # TODO: rename to adm8211.spec
- 
+
 # Conditional build:
 %bcond_without	dist_kernel	# without distribution kernel
 %bcond_without	smp		# don't build SMP module
 %bcond_with	verbose		# verbose build (V=1)
 #
+%define		_rel	1
 Summary:	Kernel driver for ADM8211 based wireless ethernet cards
 Summary(pl):	Sterownik j±dra dla bezprzewodowych kart sieciowych na ADM8211
 Name:		adm8211
 Version:	20050323
-%define		_rel	1
 Release:	%{_rel}
 License:	GPL
 Group:		Base/Kernel
 Source0:	http://aluminum.sourmilk.net/adm8211/%{name}-%{version}.tar.bz2
 # Source0-md5:	4c5607c2197401f8411e0b9d88833fa3
 URL:		http://aluminum.sourmilk.net/adm8211/
-%{?with_dist_kernel:BuildRequires:	kernel-module-build >= 2.6.7}
 BuildRequires:	%{kgcc_package}
+%{?with_dist_kernel:BuildRequires:	kernel-module-build >= 3:2.6.7}
 BuildRequires:	rpmbuild(macros) >= 1.153
 %{?with_dist_kernel:%requires_releq_kernel_up}
 Requires(post,postun):	/sbin/depmod
@@ -40,13 +40,14 @@ Group:		Base/Kernel
 Linux kernel driver for ADM8211 based wireless ethernet cards.
 
 %description -n kernel-net-adm8211 -l pl
-Sterownik j±dra Linuksa dla bezprzewodowych kart sieciowych na ADM8211.
+Sterownik j±dra Linuksa dla bezprzewodowych kart sieciowych na
+ADM8211.
 
 %package -n kernel-smp-net-adm8211
 Summary:	SMP kernel driver for ADM8211 based wireless ethernet cards
 Summary(pl):	Sterownik j±dra SMP dla bezprzewodowych kart sieciowych na ADM8211
-Group:		Base/Kernel
 Release:	%{_rel}@%{_kernel_ver_str}
+Group:		Base/Kernel
 
 %{?with_dist_kernel:%requires_releq_kernel_smp}
 Requires(post,postun):	/sbin/depmod
