@@ -8,7 +8,7 @@
 #
 %define		_rel	1
 Summary:	Kernel driver for ADM8211 based wireless ethernet cards
-Summary(pl.UTF-8):   Sterownik jądra dla bezprzewodowych kart sieciowych na ADM8211
+Summary(pl.UTF-8):	Sterownik jądra dla bezprzewodowych kart sieciowych na ADM8211
 Name:		adm8211
 Version:	20050323
 Release:	%{_rel}
@@ -32,7 +32,7 @@ Sterownik jądra dla bezprzewodowych kart sieciowych na ADM8211.
 
 %package -n kernel-net-adm8211
 Summary:	Linux driver for WLAN cards based on RT2400
-Summary(pl.UTF-8):   Sterownik dla Linuksa do kart bezprzewodowych opartych na uk3adzie RT2400
+Summary(pl.UTF-8):	Sterownik dla Linuksa do kart bezprzewodowych opartych na uk3adzie RT2400
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 
@@ -45,7 +45,7 @@ ADM8211.
 
 %package -n kernel-smp-net-adm8211
 Summary:	SMP kernel driver for ADM8211 based wireless ethernet cards
-Summary(pl.UTF-8):   Sterownik jądra SMP dla bezprzewodowych kart sieciowych na ADM8211
+Summary(pl.UTF-8):	Sterownik jądra SMP dla bezprzewodowych kart sieciowych na ADM8211
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 
