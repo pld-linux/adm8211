@@ -8,7 +8,7 @@
 #
 %define		_rel	1
 Summary:	Kernel driver for ADM8211 based wireless ethernet cards
-Summary(pl):	Sterownik j±dra dla bezprzewodowych kart sieciowych na ADM8211
+Summary(pl.UTF-8):   Sterownik jÄ…dra dla bezprzewodowych kart sieciowych na ADM8211
 Name:		adm8211
 Version:	20050323
 Release:	%{_rel}
@@ -27,25 +27,25 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Kernel driver for ADM8211 based wireless ethernet cards.
 
-%description -l pl
-Sterownik j±dra dla bezprzewodowych kart sieciowych na ADM8211.
+%description -l pl.UTF-8
+Sterownik jÄ…dra dla bezprzewodowych kart sieciowych na ADM8211.
 
 %package -n kernel-net-adm8211
 Summary:	Linux driver for WLAN cards based on RT2400
-Summary(pl):	Sterownik dla Linuksa do kart bezprzewodowych opartych na uk3adzie RT2400
+Summary(pl.UTF-8):   Sterownik dla Linuksa do kart bezprzewodowych opartych na uk3adzie RT2400
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 
 %description -n kernel-net-adm8211
 Linux kernel driver for ADM8211 based wireless ethernet cards.
 
-%description -n kernel-net-adm8211 -l pl
-Sterownik j±dra Linuksa dla bezprzewodowych kart sieciowych na
+%description -n kernel-net-adm8211 -l pl.UTF-8
+Sterownik jÄ…dra Linuksa dla bezprzewodowych kart sieciowych na
 ADM8211.
 
 %package -n kernel-smp-net-adm8211
 Summary:	SMP kernel driver for ADM8211 based wireless ethernet cards
-Summary(pl):	Sterownik j±dra SMP dla bezprzewodowych kart sieciowych na ADM8211
+Summary(pl.UTF-8):   Sterownik jÄ…dra SMP dla bezprzewodowych kart sieciowych na ADM8211
 Release:	%{_rel}@%{_kernel_ver_str}
 Group:		Base/Kernel
 
@@ -55,8 +55,8 @@ Requires(post,postun):	/sbin/depmod
 %description -n kernel-smp-net-adm8211
 Linux SMP kernel driver for ADM8211 based wireless ethernet cards.
 
-%description -n kernel-smp-net-adm8211 -l pl
-Sterownik j±dra Linuksa SMP dla bezprzewodowych kart sieciowych na
+%description -n kernel-smp-net-adm8211 -l pl.UTF-8
+Sterownik jÄ…dra Linuksa SMP dla bezprzewodowych kart sieciowych na
 ADM8211.
 
 %prep
